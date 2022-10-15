@@ -1,4 +1,4 @@
 export const navMenuText = [
-    {text :'Todo List',key:'todo-list'},
-    {text :'Weather',key:'weather'},
+    {text :'Todo List',url:'/todos'},
+    {text :'Weather',url:'/weather'},
 ]

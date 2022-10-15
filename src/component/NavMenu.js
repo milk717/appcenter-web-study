@@ -30,13 +30,14 @@ const MenuTextItem = styled.h2`
   line-height: 26px;
   color: ${props => props.select ? props.theme.color.red.redE : props.theme.color.black.black5};
 `
-export default function NavMenu({selectValue = 'Todo List'}) {
+export default function NavMenu({urlPathname = 'todos'}) {
+    console.log( urlPathname)
     return (
         <>
             <NavMenuWrap>
                 <MenuListWrap>
                     {navMenuText.map((item) => (
-                        <MenuTextItem key={item.key} select={item.text === selectValue}>{item.text}</MenuTextItem>
+                        <MenuTextItem key={item.url} select={item.url === urlPathname}>{item.text}</MenuTextItem>
                     ))}
                 </MenuListWrap>
                 <VerticalBar/>

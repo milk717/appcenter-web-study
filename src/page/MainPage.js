@@ -1,7 +1,7 @@
 import BackGroundFrame from "../component/BackgroundBox";
 import styled from "styled-components";
 import NavMenu from "../component/NavMenu";
-import {Outlet} from "react-router";
+import {Outlet, useLocation, useNavigate, useParams} from "react-router";
 
 const MainPageLayout = styled.div`
     display: flex;
@@ -11,12 +11,14 @@ const MainPageLayout = styled.div`
   width:100vw;
 `;
 export default function MainPage() {
+    const location = useLocation();
+
     return(
         <>
             <MainPageLayout>
                 <BackGroundFrame>
                     <>
-                        <NavMenu/>
+                        <NavMenu urlPathname={location.pathname}/>
                         <Outlet/>
                     </>
                 </BackGroundFrame>
