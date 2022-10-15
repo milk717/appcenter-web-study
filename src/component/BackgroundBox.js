@@ -1,24 +1,20 @@
 import styled from "styled-components";
-import NavMenu from "./NavMenu";
+import {viewHeightCalc, viewWidthCalc} from "../utils/ViewportCalculate";
 
 const BackGroundBox = styled.div`
     display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 983px;
-    height: 702px;
-    margin: 50px 0 50px 0;
+    height: ${viewHeightCalc(700,{})}vh;
+    width: calc(100% - ${viewWidthCalc(500,{})}vw);
     background: #FFFFFF;
     box-shadow: 0 10px 10px rgba(0, 0, 0, 0.25);
     border-radius: 8px;
 `;
 
-export default function BackGroundFrame({props}){
+export default function BackGroundFrame(props){
     return (
         <>
             <BackGroundBox>
-                <NavMenu/>
-                {props}
+                {props.children}
             </BackGroundBox>
         </>
     )
