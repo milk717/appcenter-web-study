@@ -3,7 +3,8 @@ import TodoItem from "./TodoItem";
 import {viewHeightCalc, viewWidthCalc} from "../utils/ViewportCalculate";
 
 const TodoListWrap = styled.div`
-  padding-top: ${viewHeightCalc(32,{})}vh;
+  margin-top: ${viewHeightCalc(32,{})};
+  margin-left: ${viewWidthCalc(52,{})};
 `;
 
 export default function TodoList(){

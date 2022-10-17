@@ -4,7 +4,7 @@ import {viewHeightCalc, viewWidthCalc} from "../utils/ViewportCalculate";
 const TodoItemWrap = styled.div`
     display: flex;
     align-items: center;
-    margin-bottom: ${viewHeightCalc(16,{})}vh;
+    margin-bottom: ${viewHeightCalc(16,{})};
 `;
 
 const Checkbox = styled.button`
@@ -17,7 +17,7 @@ const Checkbox = styled.button`
 `;
 
 const TodoText = styled.p`
-    margin-left: ${viewWidthCalc(24,{})}vw;
+    margin-left: ${viewWidthCalc(24,{})};
 `
 
 export default function TodoItem({isChecked = true, title = '내용 없음'}){

@@ -3,15 +3,14 @@ import {viewHeightCalc, viewWidthCalc} from "../utils/ViewportCalculate";
 import TodoList from "../component/TodoList";
 import PageTitle from "../component/PageTitle";
 
-const ContentArea = styled.div`
-  width: 100%;
+export const ContentArea = styled.div`
   height: 100%;
-  padding: ${viewHeightCalc(24,{})}vh ${viewWidthCalc(52,{})}vw 0 ${viewWidthCalc(52,{})}vw;
+  width: 100%;
 `;
 
 const TextArea = styled.input`
-  height: ${viewWidthCalc(47,{})}vh;
-  width: calc(100% - ${viewWidthCalc(52,{})}vw);
+  height: ${viewHeightCalc(47,{})};
+  width: calc(100% - ${viewWidthCalc(104,{})});
   background: ${props => props.theme.color.gray.grayF};
   border-radius: 8px;
   border: none;
@@ -21,8 +20,9 @@ const TextArea = styled.input`
   font-size: 18px;
   line-height: 22px;
   color: ${props => props.theme.color.gray.grayB};
-  padding-left: ${viewWidthCalc(24,{})}vw;
-  margin-top: ${viewHeightCalc(24,{})}vh;
+  padding-left: ${viewWidthCalc(24,{})};
+  margin-top: ${viewHeightCalc(24,{})};
+  margin-left: ${viewWidthCalc(52,{})};
 `
 
 export default function TodoListContainer() {
