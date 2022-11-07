@@ -9,19 +9,19 @@ const TodoListWrap = styled.div`
 
 export default function TodoList(){
     const dummyTodoText = [
-        '마인크래프트 하기',
-        '시험공부 해야하는데',
-        '전공시험 너무 많아요ㅜㅜ'
+        {text: "컴네 과제 하기",checked: false},
+        {text: "여주 공연 사회 대본 짜기",checked: true},
+        {text: "과 종총 날짜 알아보기",checked: false},
     ]
     return (
         <>
             <TodoListWrap>
                 {dummyTodoText.map((item)=>(
                     <TodoItem
-                        title={item}
+                        title={item.text}
+                        isChecked={item.checked}
                     />
                 ))}
-
             </TodoListWrap>
         </>
     );
