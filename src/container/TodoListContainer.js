@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import {viewHeightCalc, viewWidthCalc} from "../utils/ViewportCalculate";
 import TodoList from "../component/TodoList";
 import PageTitle from "../component/PageTitle";
+import {useState} from "react";
 
 export const ContentArea = styled.div`
   height: 100%;
@@ -27,12 +28,26 @@ const TextArea = styled.input`
 
 export default function TodoListContainer() {
 
+    const [todoText, setTodoText] = useState([
+        {key: 0, text: "컴네 과제 하기",checked: false},
+        {key: 1, text: "여주 공연 사회 대본 짜기",checked: true},
+        {key: 2, text: "과 종총 날짜 알아보기",checked: false},
+    ]);
+
+    const handleTodoCheck = (e, key) =>{
+        console.log(key)
+        setTodoText(todoText.map((item)=>(item.key === key ? {...item, checked: !item.checked} : item)))
+    }
+
     return(
         <>
             <ContentArea>
                 <PageTitle>Todo List</PageTitle>
                 <TextArea placeholder = 'Todo 내용을 입력해주세요'/>
-                <TodoList></TodoList>
+                <TodoList
+                    todoContentList={todoText}
+                    onClick={handleTodoCheck}
+                />
             </ContentArea>
         </>
     );
