@@ -27,11 +27,11 @@ const TodoText = styled.p`
   text-decoration: ${props=>props.isChecked ? 'line-through' : 'none'};
 `
 
-export default function TodoItem({isChecked = false, title = '내용 없음'}) {
+export default function TodoItem({isChecked = false, title = '내용 없음', onClick}) {
 
     return (
         <TodoItemWrap>
-            <Checkbox isChecked={isChecked}/>
+            <Checkbox isChecked={isChecked} onClick={onClick}/>
             <TodoText isChecked={isChecked}>{title}</TodoText>
         </TodoItemWrap>
     );
