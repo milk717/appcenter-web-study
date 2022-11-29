@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import TodoItem from "./TodoItem";
 import {viewHeightCalc, viewWidthCalc} from "../utils/ViewportCalculate";
-import {useState} from "react";
 
 const TodoListWrap = styled.div`
   margin-top: ${viewHeightCalc(32,{})};
@@ -9,7 +8,6 @@ const TodoListWrap = styled.div`
 `;
 
 export default function TodoList({onClick, todoContentList}){
-
 
     return (
         <>

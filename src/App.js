@@ -5,6 +5,7 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import WeatherContainer from "./container/WeatherContainer";
 import TodoListContainer from "./container/TodoListContainer";
 import GlobalStyle from "./resource/style/GlobalStyle";
+import DateExtension from './utils/DateFormat'
 
 function App() {
   return (
