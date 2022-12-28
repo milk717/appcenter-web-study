@@ -5,8 +5,9 @@ import {viewHeightCalc, viewWidthCalc} from "../utils/ViewportCalculate";
 import {ReactComponent as SunIcon} from '../resource/icon/SunIcon.svg';
 import {getUltraSrtNcst, getVilageFcst} from "../api/weather";
 import {useEffect, useState} from "react";
-import axios from "axios";
 import ApparentCalculate from "../utils/ApparentCalculate";
+import create from 'zustand';
+import {useWeatherStore} from "../store/weatherStore";
 
 const LocationWrap = styled.div`
   margin-top: ${viewHeightCalc(52, {})};
@@ -45,21 +46,18 @@ const Svg = styled(SunIcon)`
 `
 
 export default function WeatherContainer() {
-
-    const [nowTemp, setNowTemp] = useState('');
-    const [windV, setWindV] = useState('');
-    const [rowTemp, setRowTemp] = useState('');
-    const [highTemp, setHighTemp] = useState('');
-
+    const {weatherInfo, setWeatherInfo} = useWeatherStore();
+    const {nowTemp, highTemp, rowTemp, windV} = weatherInfo;
 
     useEffect(() => {
         getUltraSrtNcst()
             .then(res => {
+                console.log(res)
                 const items = res.response.body.items.item
                 const currentTemperature = items.filter(item => item.category === 'T1H')[0].obsrValue
                 const wind = items.filter(item => item.category === 'WSD')[0].obsrValue
-                setWindV(wind)
-                setNowTemp(currentTemperature)
+                setWeatherInfo('windV',wind)
+                setWeatherInfo('nowTemp',currentTemperature)
             })
             .catch(e => console.log(e));
 
@@ -68,8 +66,8 @@ export default function WeatherContainer() {
                 const items = res.response.body.items.item
                 const rowTemperature = items.filter(item => item.category === 'TMN')[0].fcstValue
                 const highTemperature = items.filter(item => item.category === 'TMX')[0].fcstValue
-                setRowTemp(rowTemperature)
-                setHighTemp(highTemperature)
+                setWeatherInfo('rowTemp',rowTemperature)
+                setWeatherInfo('highTemp',highTemperature)
             })
             .catch(e => console.log(e));
     }, [])

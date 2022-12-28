@@ -2,10 +2,8 @@ import styled from 'styled-components'
 import {viewHeightCalc, viewWidthCalc} from "../utils/ViewportCalculate";
 import TodoList from "../component/TodoList";
 import PageTitle from "../component/PageTitle";
-import {useState} from "react";
 import {addToList, changeText, checkTodo, clearText} from "../modules/todoReducer";
 import {useDispatch, useSelector} from "react-redux";
-import uuid from "uuid";
 
 export const ContentArea = styled.div`
   height: 100%;

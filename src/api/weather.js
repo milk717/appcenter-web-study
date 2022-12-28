@@ -6,7 +6,8 @@ export const getUltraSrtNcst = async (param = {
     numOfRows: 1000,
     dataType: 'JSON',
     base_date: new Date().format('yyyyMMdd'),
-    base_time: `${new Date().format('HH')}00`,
+    // base_time: `${new Date().format('HH')}00`,
+    base_time: `0400`,
     nx: 54,
     ny: 123
 }) => {
@@ -32,6 +33,6 @@ export const getVilageFcst = async (param = {} = {
         '/getVilageFcst',
         {params: param}
     )
-    console.log(response.data)
+    // console.log(response.data)
     return response.data;
 }
