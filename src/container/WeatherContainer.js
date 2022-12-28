@@ -3,10 +3,8 @@ import {ContentArea} from "./TodoListContainer";
 import styled from "styled-components";
 import {viewHeightCalc, viewWidthCalc} from "../utils/ViewportCalculate";
 import {ReactComponent as SunIcon} from '../resource/icon/SunIcon.svg';
-import {getUltraSrtNcst, getVilageFcst} from "../api/weather";
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import ApparentCalculate from "../utils/ApparentCalculate";
-import create from 'zustand';
 import {useWeatherStore} from "../store/weatherStore";
 
 const LocationWrap = styled.div`
@@ -46,30 +44,12 @@ const Svg = styled(SunIcon)`
 `
 
 export default function WeatherContainer() {
-    const {weatherInfo, setWeatherInfo} = useWeatherStore();
-    const {nowTemp, highTemp, rowTemp, windV} = weatherInfo;
+    const {weatherInfo, setWeatherInfo, fetchUltraSrtNcst,fetchVilageFcst} = useWeatherStore();
+    const {nowTemp, highTemp, rowTemp, windV, feelTemp} = weatherInfo;
 
     useEffect(() => {
-        getUltraSrtNcst()
-            .then(res => {
-                console.log(res)
-                const items = res.response.body.items.item
-                const currentTemperature = items.filter(item => item.category === 'T1H')[0].obsrValue
-                const wind = items.filter(item => item.category === 'WSD')[0].obsrValue
-                setWeatherInfo('windV',wind)
-                setWeatherInfo('nowTemp',currentTemperature)
-            })
-            .catch(e => console.log(e));
-
-        getVilageFcst()
-            .then(res => {
-                const items = res.response.body.items.item
-                const rowTemperature = items.filter(item => item.category === 'TMN')[0].fcstValue
-                const highTemperature = items.filter(item => item.category === 'TMX')[0].fcstValue
-                setWeatherInfo('rowTemp',rowTemperature)
-                setWeatherInfo('highTemp',highTemperature)
-            })
-            .catch(e => console.log(e));
+        fetchUltraSrtNcst().then(() => setWeatherInfo('feelTemp',ApparentCalculate(Number(nowTemp), Number(windV))));
+        fetchVilageFcst();
     }, [])
 
     return (
@@ -84,7 +64,7 @@ export default function WeatherContainer() {
                     <Svg/>
                     <p>현재 기온 : {nowTemp} </p>
                     <p>최저 / 최고 : {rowTemp} / {highTemp}</p>
-                    <p>체감 온도 : {ApparentCalculate(Number(nowTemp), Number(windV))}</p>
+                    <p>체감 온도 : {feelTemp}</p>
                 </WeatherBox>
             </ContentArea>
         </>

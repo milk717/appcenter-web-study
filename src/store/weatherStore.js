@@ -1,4 +1,5 @@
 import create from "zustand";
+import {getUltraSrtNcst, getVilageFcst} from "../api/weather";
 
 export const useWeatherStore = create((set)=>({
     weatherInfo:{
@@ -6,6 +7,7 @@ export const useWeatherStore = create((set)=>({
         highTemp: 0,
         rowTemp: 0,
         windV: 0,
+        feelTemp: 0,
     },
     setWeatherInfo: (key, value) => {
         set((state)=>({
@@ -15,4 +17,36 @@ export const useWeatherStore = create((set)=>({
             }
         }));
     },
+    fetchUltraSrtNcst: () => (
+        getUltraSrtNcst()
+            .then(res => {
+                const items = res.response.body.items.item
+                const currentTemperature = items.filter(item => item.category === 'T1H')[0].obsrValue
+                const wind = items.filter(item => item.category === 'WSD')[0].obsrValue
+                set((state)=>({
+                    weatherInfo: {
+                        ...state.weatherInfo,
+                        windV: wind,
+                        nowTemp: currentTemperature,
+                    }
+                }));
+            })
+            .catch(e => console.log(e))
+    ),
+    fetchVilageFcst: () =>(
+        getVilageFcst()
+            .then(res => {
+                const items = res.response.body.items.item
+                const rowTemperature = items.filter(item => item.category === 'TMN')[0].fcstValue
+                const highTemperature = items.filter(item => item.category === 'TMX')[0].fcstValue
+                set((state)=>({
+                    weatherInfo: {
+                        ...state.weatherInfo,
+                        rowTemp: rowTemperature,
+                        highTemp: highTemperature,
+                    }
+                }))
+            })
+            .catch(e => console.log(e))
+    )
 }))
