@@ -6,6 +6,7 @@ import WeatherContainer from "./container/WeatherContainer";
 import TodoListContainer from "./container/TodoListContainer";
 import GlobalStyle from "./resource/style/GlobalStyle";
 import DateExtension from './utils/DateFormat'
+import WeatherContainerWithRecoil from "./container/WeatherContainerWithRecoil";
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
                   <Routes>
                       <Route path={`/`} element={<MainPage/>}>
                           <Route path={`/todos`} element={<TodoListContainer/>}/>
-                          <Route path={`/weather`} element={<WeatherContainer/>}/>
+                          <Route path={`/weather`} element={<WeatherContainerWithRecoil/>}/>
                       </Route>
                   </Routes>
               </BrowserRouter>

@@ -5,6 +5,7 @@ import reportWebVitals from './reportWebVitals';
 import {configureStore} from "@reduxjs/toolkit";
 import {Provider} from "react-redux";
 import {rootReducer} from "./modules";
+import {RecoilRoot} from "recoil";
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -16,7 +17,11 @@ const store = configureStore({
 root.render(
     <Provider store={store}>
         <React.StrictMode>
-            <App />
+            <RecoilRoot>
+                <React.Suspense fallback={<div>Loading...</div>}>
+                    <App />
+                </React.Suspense>
+            </RecoilRoot>
         </React.StrictMode>
     </Provider>
 );

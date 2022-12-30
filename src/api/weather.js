@@ -7,7 +7,7 @@ export const getUltraSrtNcst = async (param = {
     dataType: 'JSON',
     base_date: new Date().format('yyyyMMdd'),
     // base_time: `${new Date().format('HH')}00`,
-    base_time: `0400`,
+    base_time: `0800`,
     nx: 54,
     ny: 123
 }) => {
